@@ -386,6 +386,35 @@
         .hidden {
             display: none !important;
         }
+        /* Table Styles */
+.assessment-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background-color: rgba(10, 14, 39, 0.3);
+}
+.assessment-content table th,
+.assessment-content table td {
+    border: 1px solid var(--border-color);
+    padding: 0.75rem;
+    text-align: left;
+}
+.assessment-content table th {
+    background-color: var(--hover-bg);
+    color: var(--accent-green);
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent-green);
+}
+.assessment-content table tr:hover {
+    background-color: var(--hover-bg);
+}
+.assessment-content table td {
+    color: var(--text-secondary);
+}
+/* Alternating row colors for better readability */
+.assessment-content table tr:nth-child(even) {
+    background-color: rgba(30, 38, 66, 0.3);
+}
     </style>
 </head>
 <body>
@@ -465,7 +494,7 @@
                 <div class="assessment-content" id="week2-requirements" data-assessment="week2-requirements">
                     <h2>Requirements Elicitation</h2>
                     <p>For this task we have been assigned to present a SW system that is a ‘Help Point’ for students at the University. </p>
-                    <p>Activity 1:</p>
+                    <h3>Activity 1:</h3>
                     <ol>
                         <li>For this task we can implement the Semi-Structured Interview based method to be able to get more ideas about features that may be missing, questionnaires, introspection and observation and contrived techniques. Each individual technique will bring the results needed for the requirements gathering. We do believe also that the questionnaires can be a great technique too, since we can send them through emails and get the answers faster.</li>
                         <li>I found each technique valuable for the requirements gathering, because all and each one individual technique will bring up the needs of the students/users of the software. At the end, we can choose which one of them is more convenient and less time consuming for future re-use if needed.
@@ -479,20 +508,82 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                <th scope="row">the site’s code is a combination of JS and django and generates on client’s system</th>
+                                <td>the site’s code is a combination of JS and django and generates on client’s system</td>
                                 <td>the site theme has dark mode</td>
                                 </tr>
-                            
-                            
-                            
-                            
-                            
+                                <tr>
+                                <td>when new users visiting, a pop up ad asks for their email</td>
+                                <td>the system's database is cloud hosted, makes it even faster at lower cost</td>
+                                </tr>
+                                <tr>
+                                <td>if a user using wrong password, “your are using the wrong credentials” is shown on the login screen</td>
+                                <td>the common Q & A's can be found on site</td>
+                                </tr>
+                                <tr>
+                                <td>if a user conducting a search through the system, a message “please wait” shows up while it is using a third party API to get the results.</td>
+                                <td>the users should be able to use the site through all particular devices</td>
+                                </tr>
                             </tbody>
                             </table>
                         </li>
                     </ol>
+                    <h3>Activity 2:</h3>
+                    <h4>PACT Analysis</h4>
+                    <h5><i>Product Name: voting counts website</i></h5>
+                    <ul>
+                        <li><b>People:</b> Young adults (18 and older) which are most probably students and people who don’t vote at the moment (this includes all genders and ages plus people with disabilities, such as deaf, blind, or with different blindness %), but they have rights to vote (UK native residents and foreigners). Politicians who are interested to read facts and stats about the non-voters. Journalists who looking to research and cover the topic.</li>
+                        <li><b>Activities:</b> Register to be able to have an account and login which is giving privileges such as voting, commenting on blog posts, order posters and merchandise and even download content. Navigate along the different pages to read the content. Search the whole website about specific topics and visit links to external sources. Being able to follow other social media pages of the brand. Donate to the cause.</li>
+                        <li><b>Contexts:</b> This website could be used everywhere and anywhere since the main topic is something that everyone with voting rights could be interested at. It is available through the internet, and since the content includes different type of multimedia such as pictures and videos, a stable WiFi or cellular connection is needed. Since people would try to read the posts, noise and other disturbance factors will play a major role. There’s an addition here, that if a person tries to read the pages outside, colours and contrast should carefully be picked to avoid concentration exhaustion due to lighting on different environments.</li>
+                        <li><b>Technologies:</b> The users could use a computer/laptop or a smartphone. To input data, either for the login credentials or any comments they may want to post, they will use their physical keyboards, their phone’s touch screen or speech to text technology to write on forms. Expandable menus that are automatically fit for best practice on computer or smartphone screen. To be able to use the search option the search bar should be used in the same way as the forms. For video output we mainly using the video embedding technology where videos are hosted on other websites and a simple player embeds to deal with the video. There should be an option that “translates” the website to text to speech for the blind people. Also an option that magnify the text, so people with other blindness % can read too.</li>
+                        <li><b>Business Goals:</b> To be able to provide information about the non-voters, the difference that their vote will have into the world, and help them understand their power to change things through their votes.</li>
+                    </ul>
+                    <h4>Heuristic Inspection</h4>
+                    <table> 
+                            <tbody>
+                                <tr>
+                                <td>Does the software give you feedback on what it’s doing? Does it do this well or not so well? Does it do it in good time?</td>
+                                <td>By searching the website and it’s features it is easy to see that everything works normally. The pages and links worked as expected, in good time.</td>
+                                </tr>
+                                <tr>
+                                <td>How well does the software communicate with you – does it expect you to understand technical words/ideas or is it easy for anyone to understand? Metaphor/speak user’s language</td>
+                                <td>The communication is easy, there are not many technical words, but even when a user is facing some, the blog posts were able to be explanatory.</td>
+                                </tr>
+                                <tr>
+                                <td>If you make a mistake does it let you undo it simply and quickly?</td>
+                                <td>Yes, but, this website is made in such way that the users can only miss click (there are not forms to be filled etc.) so the use of return button is simple and quick.</td>
+                                </tr>
+                                <tr>
+                                <td>Does it use the same conventions/terminology all through the application? Does it look like the same product the whole way through? Does it look like other similar products on the market?</td>
+                                <td>Yes, the terminology used through the application is the same for the whole product. There are similar products on the market, aiming to different niches, following the same scheme, to help people get educated about their rights and the news regards the elections.</td>
+                                </tr>
+                                <tr>
+                                <td>Does it stop you from making a mistake? Think about message prompts perhaps or greying out of buttons you shouldn’t press.</td>
+                                <td>In this specific product there are not many mistakes you can do. Individuals may expect a message to come up when they click on links that take them to another website explaining that they are taken away (for the merchandise as an example)</td>
+                                </tr>
+                                <tr>
+                                <td>While using the software do you have to remember where things are/how to do things or are there prompts, memory aids, help?</td>
+                                <td>Yes, it seems that the menu including many sections. Information could result being seen chaotic to some individuals.</td>
+                                </tr>
+                                <tr>
+                                <td>You use this software a lot – or so you said. Have you become an expert? Do you know the short cuts? Are there any short cuts? Can you remember doing things in more ‘round about’ ways when you first used it? Are the short cuts obvious or do you only find them when you’ve used it for a while?</td>
+                                <td>As an example, to find a specific post you can use the search bar and not scroll through the whole website. Generally the website if self- explanatory and easy to be used even for new users.</td>
+                                </tr>
+                                <tr>
+                                <td>Does it look nice? Well what you think is nice, I may think is not nice. So, does it arrange things so that they are easy to find? Does the arrangement and the colour scheme draw your eye to the important places? How many different colours are there in the colour scheme? Is the information/display well-spaced?</td>
+                                <td>The site looks nice, the colours giving space for the eyes to read the text without distractions. Personally i would expect a better management on the menu since many posts are being there. I can spot at least 5 different colours.</td>
+                                </tr>
+                                <tr>
+                                <td>What happens if you make a mistake? Is it easy to recover? What happens?</td>
+                                <td>If a user miss clicks a link, can be easily reverse by the “return” button on browser.</td>
+                                </tr>
+                                <tr>
+                                <td>Is there a help facility? It may well not be called help. How helpful is it?</td>
+                                <td>No, there is no help facility, but the whole website is focusing on giving explanation regards the topics. Each post breaks down to a part and gives a deeper view on individual sides of the topic.</td>
+                                </tr>   
+                            </tbody>
+                            </table>
                 </div>
-
+                    
                 <!-- Week 3: Software Challenge -->
                 <div class="assessment-content" id="week3-challenge" data-assessment="week3-challenge">
                     <h2>Week 3: Software Challenge</h2>
