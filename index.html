@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hobb7t student Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #0a0e27;
+            --bg-sidebar: #141b2d;
+            --accent-green: #00ff41;
+            --text-primary: #e0e0e0;
+            --text-secondary: #8b92a8;
+            --hover-bg: #1e2642;
+            --border-color: #2a3352;
+        }
+
+        body {
+            font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-sidebar);
+            z-index: 10;
+        }
+
+        .portfolio-title {
+            font-size: 1.25rem;
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px var(--accent-green);
+        }
+
+        .portfolio-title::before {
+            content: '> ';
+            color: var(--accent-green);
+        }
+
+        .search-container {
+            position: relative;
+            margin-top: 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.875rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-green);
+            box-shadow: 0 0 5px rgba(0, 255, 65, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .nav-content {
+            padding: 1rem 0;
+        }
+
+        .class-section {
+            margin-bottom: 0.5rem;
+        }
+
+        .class-header {
+            padding: 0.75rem 1rem;
+            background-color: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .class-header:hover {
+            background-color: var(--hover-bg);
+            color: var(--accent-green);
+        }
+
+        .class-header.active {
+            color: var(--accent-green);
+            background-color: var(--hover-bg);
+        }
+
+        .class-icon {
+            font-size: 0.75rem;
+            transition: transform 0.3s ease;
+        }
+
+        .class-header.active .class-icon {
+            transform: rotate(90deg);
+        }
+
+        .assessments-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background-color: rgba(10, 14, 39, 0.5);
+        }
+
+        .assessments-list.expanded {
+            max-height: 1000px;
+        }
+
+        .assessment-link {
+            display: block;
+            padding: 0.6rem 1rem 0.6rem 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            border-left: 2px solid transparent;
+        }
+
+        .assessment-link:hover {
+            background-color: var(--hover-bg);
+            color: var(--accent-green);
+            border-left-color: var(--accent-green);
+            padding-left: 2.25rem;
+        }
+
+        .assessment-link.active {
+            color: var(--accent-green);
+            background-color: var(--hover-bg);
+            border-left-color: var(--accent-green);
+        }
+
+        .assessment-link::before {
+            content: '▸ ';
+            color: var(--accent-green);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .assessment-link:hover::before,
+        .assessment-link.active::before {
+            opacity: 1;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        .hamburger {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background-color: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background-color: var(--accent-green);
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .content-area {
+            max-width: 1200px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section {
+            padding: 2rem;
+            background-color: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .welcome-section h1 {
+            color: var(--accent-green);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 15px var(--accent-green);
+        }
+
+        .welcome-section h1::before {
+            content: '$ ';
+        }
+
+        .welcome-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .terminal-prompt {
+            color: var(--accent-green);
+            margin-top: 1.5rem;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .assessment-content {
+            display: none;
+            padding: 2rem;
+            background-color: var(--bg-sidebar);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .assessment-content.active {
+            display: block;
+        }
+
+        .assessment-content h2 {
+            color: var(--accent-green);
+            margin-bottom: 1.5rem;
+            font-size: 1.75rem;
+        }
+
+        .assessment-content h3 {
+            color: var(--accent-green);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .assessment-content p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .assessment-content ul,
+        .assessment-content ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .assessment-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
+        .no-results {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-250px);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+                padding-top: 4rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .welcome-section {
+                padding: 1.5rem;
+            }
+
+            .welcome-section h1 {
+                font-size: 1.5rem;
+            }
+
+            .assessment-content {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hamburger Menu -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="portfolio-title">Portfolio</h1>
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search assessments..."
+                        aria-label="Search assessments"
+                    >
+                </div>
+            </div>
+
+            <div class="nav-content" id="navContent">
+                <!-- Software Engineering Fundamentals -->
+                <div class="class-section" data-class="software-engineering-fundamentals">
+                    <button class="class-header" data-class-id="sef">
+                        <span>Software Engineering Fundamentals</span>
+                        <span class="class-icon">▶</span>
+                    </button>
+                    <div class="assessments-list">
+                        <a href="#" class="assessment-link" data-assessment="week2-requirements">Requirements Elicitation</a>
+                        <a href="#" class="assessment-link" data-assessment="week3-challenge">Software Challenge</a>
+                        <a href="#" class="assessment-link" data-assessment="week4-flowchart">Flowchart Development</a>
+                        <a href="#" class="assessment-link" data-assessment="week5-decomposition">Functional Decomposition</a>
+                        <a href="#" class="assessment-link" data-assessment="week6-usecase">Detailed Use Case</a>
+                        <a href="#" class="assessment-link" data-assessment="week7-methodology">Software Development Methodology</a>
+                        <a href="#" class="assessment-link" data-assessment="week8-ethics">Ethics</a>
+                        <a href="#" class="assessment-link" data-assessment="week8-groupwork">Group Work</a>
+                        <a href="#" class="assessment-link" data-assessment="week10-testing">Testing (Verification & Validation)</a>
+                        <a href="#" class="assessment-link" data-assessment="week11-testing2">Testing 2 (Structural Test Plan)</a>
+                    </div>
+                </div>
+
+                <!-- Placeholder for additional classes -->
+                <!-- You can add more class sections here following the same structure -->
+
+                <div class="no-results hidden" id="noResults">No matching assessments found.</div>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="mainContent">
+            <div class="content-area">
+                <!-- Welcome Section (Default View) -->
+                <div class="welcome-section" id="welcomeSection">
+                    <h1>Welcome to my portfolio</h1>
+                    <p>
+                        This portfolio showcases my work while studing for my Bsc. in Computer Science with hons in development. 
+                        Navigate through the sidebar to explore various assessments and assignments completed throughout my academic journey.
+                    </p>
+                    <p>
+                        Each assessment demonstrates different aspects from different classes, and collaborative or solo work practices.
+                    </p>
+                    <p>
+                        Use the search bar to quickly find specific topics or assessments. Click on any assessment in the 
+                        sidebar to view its detailed content.
+                    </p>
+                    <div class="terminal-prompt">▶ Select an assessment to begin_</div>
+                </div>
+
+                <!-- Assessment Content Placeholders -->
+                <!-- Week 2: Requirements Elicitation -->
+                <div class="assessment-content" id="week2-requirements" data-assessment="week2-requirements">
+                    <h2>Requirements Elicitation</h2>
+                    <p>For this task we have been assigned to present a SW system that is a ‘Help Point’ for students at the University. </p>
+                    <p>Activity 1:</p>
+                    <ol>
+                        <li>For this task we can implement the Semi-Structured Interview based method to be able to get more ideas about features that may be missing, questionnaires, introspection and observation and contrived techniques. Each individual technique will bring the results needed for the requirements gathering. We do believe also that the questionnaires can be a great technique too, since we can send them through emails and get the answers faster.</li>
+                        <li>I found each technique valuable for the requirements gathering, because all and each one individual technique will bring up the needs of the students/users of the software. At the end, we can choose which one of them is more convenient and less time consuming for future re-use if needed.
+                        <li>The client want this service to be available only to users who sign in through the campus? It is ok if this SW to be open to the internet? What security measures should be taken to make sure that user's information will remain safe even in the case of an exploit (this question should be answered when we know more about what information will be gathered from the users)? Will the database be stored on cloud or on premises? Who is going to manually work on the backend from time to time (so we can choose the right tool for the creation which will be more user friendly in case this job is assigned to a non technical user)?
+                        <li><table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">FUNCTIONAL</th>
+                                    <th scope="col">NON - FUNCTIONAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <th scope="row">the site’s code is a combination of JS and django and generates on client’s system</th>
+                                <td>the site theme has dark mode</td>
+                                </tr>
+                            
+                            
+                            
+                            
+                            
+                            </tbody>
+                            </table>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Week 3: Software Challenge -->
+                <div class="assessment-content" id="week3-challenge" data-assessment="week3-challenge">
+                    <h2>Week 3: Software Challenge</h2>
+                    <p>Content for Week 3: Software Challenge will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 4: Flowchart Development -->
+                <div class="assessment-content" id="week4-flowchart" data-assessment="week4-flowchart">
+                    <h2>Week 4: Flowchart Development</h2>
+                    <p>Content for Week 4: Flowchart Development will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 5: Functional Decomposition -->
+                <div class="assessment-content" id="week5-decomposition" data-assessment="week5-decomposition">
+                    <h2>Week 5: Functional Decomposition</h2>
+                    <p>Content for Week 5: Functional Decomposition will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 6: Detailed Use Case -->
+                <div class="assessment-content" id="week6-usecase" data-assessment="week6-usecase">
+                    <h2>Week 6: Detailed Use Case</h2>
+                    <p>Content for Week 6: Detailed Use Case will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 7: Software Development Methodology -->
+                <div class="assessment-content" id="week7-methodology" data-assessment="week7-methodology">
+                    <h2>Week 7: Software Development Methodology</h2>
+                    <p>Content for Week 7: Software Development Methodology will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 8: Ethics -->
+                <div class="assessment-content" id="week8-ethics" data-assessment="week8-ethics">
+                    <h2>Week 8: Ethics</h2>
+                    <p>Content for Week 8: Ethics will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 8: Group Work -->
+                <div class="assessment-content" id="week8-groupwork" data-assessment="week8-groupwork">
+                    <h2>Week 8: Group Work</h2>
+                    <p>Content for Week 8: Group Work will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 10: Testing (Verification & Validation) -->
+                <div class="assessment-content" id="week10-testing" data-assessment="week10-testing">
+                    <h2>Week 10: Testing (Verification & Validation)</h2>
+                    <p>Content for Week 10: Testing (Verification & Validation) will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+
+                <!-- Week 11: Testing 2 (Structural Test Plan) -->
+                <div class="assessment-content" id="week11-testing2" data-assessment="week11-testing2">
+                    <h2>Week 11: Testing 2 (Structural Test Plan)</h2>
+                    <p>Content for Week 11: Testing 2 (Structural Test Plan) will be displayed here.</p>
+                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const hamburger = document.getElementById('hamburger');
+        const searchInput = document.getElementById('searchInput');
+        const welcomeSection = document.getElementById('welcomeSection');
+        const classHeaders = document.querySelectorAll('.class-header');
+        const assessmentLinks = document.querySelectorAll('.assessment-link');
+        const classSections = document.querySelectorAll('.class-section');
+        const noResults = document.getElementById('noResults');
+
+        // Hamburger Menu Toggle
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        // Accordion Toggle for Class Sections
+        classHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const assessmentsList = header.nextElementSibling;
+                const isActive = header.classList.contains('active');
+
+                // Toggle current section
+                header.classList.toggle('active');
+                assessmentsList.classList.toggle('expanded');
+
+                // Optional: Close other sections (comment out if you want multiple sections open)
+                // classHeaders.forEach(otherHeader => {
+                //     if (otherHeader !== header) {
+                //         otherHeader.classList.remove('active');
+                //         otherHeader.nextElementSibling.classList.remove('expanded');
+                //     }
+                // });
+            });
+        });
+
+        // Assessment Link Click Handler
+        assessmentLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                const assessmentId = link.getAttribute('data-assessment');
+                
+                // Remove active class from all links
+                assessmentLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Hide welcome section and all assessment contents
+                welcomeSection.style.display = 'none';
+                document.querySelectorAll('.assessment-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show selected assessment content
+                const selectedContent = document.getElementById(assessmentId);
+                if (selectedContent) {
+                    selectedContent.classList.add('active');
+                    
+                    // Smooth scroll to top
+                    mainContent.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+                
+                // Close sidebar on mobile after selection
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        });
+
+        // Search Functionality
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            let hasResults = false;
+
+            classSections.forEach(section => {
+                const classHeader = section.querySelector('.class-header');
+                const assessmentsList = section.querySelector('.assessments-list');
+                const assessments = section.querySelectorAll('.assessment-link');
+                
+                let classHasMatch = false;
+                
+                // Check each assessment
+                assessments.forEach(assessment => {
+                    const assessmentText = assessment.textContent.toLowerCase();
+                    
+                    if (assessmentText.includes(searchTerm) || searchTerm === '') {
+                        assessment.classList.remove('hidden');
+                        classHasMatch = true;
+                        hasResults = true;
+                    } else {
+                        assessment.classList.add('hidden');
+                    }
+                });
+                
+                // Show/hide class section based on matches
+                if (classHasMatch || searchTerm === '') {
+                    section.classList.remove('hidden');
+                    
+                    // Auto-expand sections when searching
+                    if (searchTerm !== '') {
+                        classHeader.classList.add('active');
+                        assessmentsList.classList.add('expanded');
+                    }
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+
+            // Show/hide no results message
+            if (!hasResults && searchTerm !== '') {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        });
+
+        // Smooth scrolling for all internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', () => {
+            // Reset to welcome view
+            welcomeSection.style.display = 'block';
+            document.querySelectorAll('.assessment-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            assessmentLinks.forEach(link => link.classList.remove('active'));
+        });
+
+        // Initialize: Ensure welcome section is visible on load
+        welcomeSection.style.display = 'block';
+    </script>
+</body>
+</html>
