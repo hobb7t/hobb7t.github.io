@@ -442,10 +442,10 @@
             </div>
 
             <div class="nav-content" id="navContent">
-                <!-- Software Engineering Fundamentals -->
+                <!-- Software Engineering -->
                 <div class="class-section" data-class="software-engineering-fundamentals">
                     <button class="class-header" data-class-id="sef">
-                        <span>Software Engineering Fundamentals</span>
+                        <span>Software Engineerings</span>
                         <span class="class-icon">▶</span>
                     </button>
                     <div class="assessments-list">
@@ -490,7 +490,7 @@
                 </div>
 
                 <!-- Assessment Content Placeholders -->
-                <!-- Week 2: Requirements Elicitation -->
+                <!-- Requirements Elicitation -->
                 <div class="assessment-content" id="week2-requirements" data-assessment="week2-requirements">
                     <h2>Requirements Elicitation</h2>
                     <p>For this task we have been assigned to present a SW system that is a ‘Help Point’ for students at the University. </p>
@@ -584,11 +584,63 @@
                             </table>
                 </div>
                     
-                <!-- Week 3: Software Challenge -->
+                <!-- Software Challenge -->
                 <div class="assessment-content" id="week3-challenge" data-assessment="week3-challenge">
-                    <h2>Week 3: Software Challenge</h2>
-                    <p>Content for Week 3: Software Challenge will be displayed here.</p>
-                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                    <h2>Software Challenge</h2>
+                    <p>For this task we have to develop the basic elements of a software that is calculating the correct dosage of a medicine, which is prescribed by a vet doctor. This software has to take into consideration different factors such as the dog's age, weight and nursing status in case of females and also generate the final cost of the prescription. </p>
+                    <ol>
+                        <li><h4>Application requirements:</h4>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">FUNCTIONAL</th>
+                                    <th scope="col">NON - FUNCTIONAL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Secure login for authorised staff. </td>
+                                <td>The system should be available whenever the clinic is open. </td>
+                                </tr>
+                                <tr>
+                                <td>Maintain a record of previous prescriptions.</td>
+                                <td>The scalability of such project should be considered, thus being able to add more storage resources should be easy.</td>
+                                </tr>
+                                <tr>
+                                <td>An alert system that is notifying the user about over or underweight animals.</td>
+                                <td>Must be compatible with most browsers and devices, since the clinic may use computers or tablets to access it.</td>
+                                </tr>
+                                <tr>
+                                <td>Calculation of the appropriate dosage depending each animal's weight, age (when it is a puppy) or nursing status (in case of females).</td>
+                                <td>The interface must be user friendly, but at the same time to fit to a vet clinic. Graphics should be carefully be picked.</td>
+                                </tr>
+                                <tr>
+                                <td>Calculation of the cost, depending on the type and quantity of the medicine.</td>
+                                <td>The software has to be documented so any new doctor who starts working, could understand every feature to avoid mistakes.</td>
+                                </tr>
+                                <tr>
+                                <td>Being able to see and edit the information / medical history of the animal (such as breed, age, weight).</td>
+                                <td>The patient's database should backed up more than 2 times a day to avoid any missing files.</td>
+                                </tr>
+                            </tbody>
+                            </table></li>
+                        <li><h4>Sequence of instructions:</h4>
+                            <ol type="a">
+                                <li>The user logs through the login page by using the valid credentials.</li>
+                                <li>The user either creates a new patient's form or searching for existing ones by using the menu or the search box accordingly. Through the form, the user will add or modify the animal's information, such as breed, chip ID, weight, colour, previous health history/incidents, nursing status and age.</li>
+                                <li>Now that the system has all the information needed for the calculations, the user using the menu can use the dosage calculator.</li>
+                                <li>By checking the correct medicine, the system calculates the dosage needed for this specific patient based on the information that the user previously saved. At this stage, the medicines cost is also calculated.</li>
+                                <li>The system generates an analytical prescription including any additional medicine may needed (in case of nursing for example) such as tapeworm drops, but also includes the cost of each medicine, the quantity and any extra information such as "usage instructions" by the user or alerts depending the breed, weight and the age of the individual animal. Now the user has the option to send this prescription to be printed as the system have already saved the prescription into the patient's history.</li>
+                                <li>The user can logout and turn off the system or just close the browser window.</li>
+                            </ol>
+                        </li>
+                        <li><h4>Sequence of Instructions flowchart with a bit of "Software-centric" mindset:</h4>
+                            <p><iframe title="embedded content" src="https://drive.google.com/file/d/1LZvT1xFp3C6N3sgORxmNlaum7yRPLt3R/preview" width="900" height="480" allow="autoplay"></iframe></p>
+                        </li>
+                        <li><h4>Wireframe diagram:</h4>
+                            <p><iframe title="embedded content" src="https://drive.google.com/file/d/1PpfQD74zUIeSgXBhhWNX1uy-4qU7nxbc/preview" width="900" height="680" allow="autoplay"></iframe></p>
+                        </li>
+                    </ol>
                 </div>
 
                 <!-- Week 4: Flowchart Development -->
