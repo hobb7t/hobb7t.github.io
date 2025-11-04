@@ -752,11 +752,98 @@
                     </ol>
                 </div>
 
-                <!-- Week 6: Detailed Use Case -->
+                <!-- Detailed Use Case -->
                 <div class="assessment-content" id="week6-usecase" data-assessment="week6-usecase">
-                    <h2>Week 6: Detailed Use Case</h2>
-                    <p>Content for Week 6: Detailed Use Case will be displayed here.</p>
-                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                    <h2>Detailed Use Case</h2>
+                    <ol>
+                        <li><h3>Rewrite your Use case for check balance, using the more Detailed Use Case template.</h3>
+                        <br>
+                        <br>
+                        <h4>Case#0001</h4>
+                        <h5>Case name: Check balance to withdraw cash</h5>
+                            <table>
+                            <tbody>
+                                <tr>
+                                <td><b>Actors</b></td>
+                                <td><ul>
+                                    <li>primary actor: user (account owner)</li>
+                                    <li>secondary actors: bank system, ATM machine</li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                <td><b>Description</b></td>
+                                <td>The user want to verify his available credit in his bank account and based on the outcome, to be able to withdraw cash. Such interaction involves the user initiating a transaction on the ATM using his card and PIN to get verified, which then communicates with the bank's servers to retrieve the information. The outcome is a secure process where the user get informed about the credit balance and if sufficient funds are available, then proceed to withdraw the cash.</td>
+                                </tr>
+                                <tr>
+                                <td><b>Trigger</b></td>
+                                <td>The user is ready to go for shopping or maybe a long night out with friends on a pub. Before he start spending, to be able to feel safe about his remain credit, he has to check if there  are any available funds in the account. Since there are times where a blackout or and internet disruption can take place, having some cash in the wallet is critical, even to get a cab later to return at home.</td>
+                                </tr>
+                                <tr>
+                                <td><b>Preconditions</b></td>
+                                <td><ul>
+                                    <li>The user always have the bank card inside the wallet.</li>
+                                    <li>The user know his PIN.</li>
+                                    <li>ATMs can be found around his area at all times and is functioning normally.</li>
+                                    <li>The user has a sufficient balance in his account.</li>
+                                    </ul></td>
+                                </tr>
+                                <tr>
+                                <td><b>Postconditions (guarantees)</b></td>
+                                <td><h5>Success guarantees:</h5>
+                                    <ul>
+                                    <li>The ATM will display the available balance.</li>
+                                    <li>If the user choose to withdraw cash and there is sufficient balance, he can request a specific amount of cash to get.</li>
+                                    <li>After his successful initiation with the ATM the user will receive a confirmation of his transaction.</li>
+                                    </ul>
+                                    <h5>Minimal guarantees</h5>
+                                    <ul>
+                                    <li>The ATM will terminate the initiation, even if the user do not have sufficient balance for the user to withdraw, so other users could use the system.</li>
+                                    </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                <td><b>Normal Flow</b></td>
+                                <td><ol type="A">
+                                    <li>The user put the card on ATM</li>
+                                    <li>The ATM check the card and asking for PIN verification</li>
+                                    <li>The user inputs the PIN</li>
+                                    <li>The system validates the PIN. The PIN is valid</li>
+                                    <li>On screen a menu is presented</li>
+                                    <li>The user choose to check the balance</li>
+                                    <li>The ATM gives the option to print the balance on screen or on paper</li>
+                                    <li>The user pick the screen method</li>
+                                    <li>ATM showing the available credits on screen and then asks if the user wants to withdraw, to return on menu or to log out</li>
+                                    <li>The user choose to withdraw 50 euros</li>
+                                    <li>ATM validates that the requested amount is not more than the available credits and starts counting the cash</li>
+                                    <li>ATM drop out the card and wait for the user to remove it while a thanks / goodbye message show on screen</li>
+                                    <li>The user removes the card. The ATM present the cash. The user takes the cash and leaves</li>
+                                    <li>ATM screen refreshes and goes back to the intro screen where a video is playing</li>
+                                    </ol></td>
+                                </tr>
+                                <tr>
+                                <td><b>Alternative Flows</b></td>
+                                <td>
+                                    <b>C1)</b> The user miss-typed an invalid PIN. The ATM prints an error message on screen and giving another chance to the user to input the correct PIN. This is a loop that expecting from the user either the correct pin or to cancel the transaction.
+                                    <br>
+                                    <b>C2)</b> The user typed 3 times an invalid PIN and then the ATM will hold the card and prompt the user to contact the bank. 
+                                    <br>
+                                    <b>G1)</b> The user choose to receive the balance output printed on receipt. The ATM generate a receipt displaying the available credits and details such as date/time, address of ATM.
+                                    <br>
+                                    <b>I1)</b> The user choose to logout. The ATM ends the transaction, drop out the card and display a "Good bye" message on screen. 
+                                    <br>
+                                    <b>J1)</b> If the user attempt to withdraw an amount that exceeding the available credits the ATM will display an error message prompting the user to input a smaller amount or to cancel the transaction. 
+                                    <br>
+                                    <b>J2)</b> The user choose an amount for example 50euros but this specific ATM works only with 20e and 50e bills. The ATM will display an error message prompting the user to input a different amount or to cancel the transaction. 
+                                    <br>
+                                    
+                                </td>
+                                </tr>
+                            </tbody>
+                    </table>
+                        </li>
+                        <li><h3>Draw a Use Case Diagram for a Cashpoint/ATM</h3></li>
+                    </ol>
+                    <iframe title="embedded content" src="https://drive.google.com/file/d/1TKQUi9rKKf01ETVKYDklBK4n_HrDYvn6/preview" width="700" height="480" allow="autoplay"></iframe>
                 </div>
 
                 <!-- Week 7: Software Development Methodology -->
