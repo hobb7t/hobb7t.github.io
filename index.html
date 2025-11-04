@@ -656,11 +656,100 @@
                     <p><iframe title="embedded content" src="https://drive.google.com/file/d/1xXxxqC3RgvlgGCaiCVdVqTeaNfESGVvz/preview" width="800" height="480" allow="autoplay"></iframe></p>
                 </div>
 
-                <!-- Week 5: Functional Decomposition -->
+                <!-- Functional Decomposition -->
                 <div class="assessment-content" id="week5-decomposition" data-assessment="week5-decomposition">
-                    <h2>Week 5: Functional Decomposition</h2>
-                    <p>Content for Week 5: Functional Decomposition will be displayed here.</p>
-                    <p>Replace this placeholder with your actual assessment content, including any HTML, text, images, or embedded resources.</p>
+                    <h2>Functional Decomposition</h2>
+                    <p>*For the following task, i have used a template from Inflectra.com</p>
+                    <h3>Practice Use Case Scenarios:</h3>
+                    <table>
+                            <tbody>
+                                <tr>
+                                <td>Use Case #1 </td>
+                                <td>Check balance</td>
+                                </tr>
+                                <tr>
+                                <td>Description</td>
+                                <td>A user wants to check credit balance on his bank account</td>
+                                </tr>
+                                <tr>
+                                <td>Actors</td>
+                                <td>The account owner, the bank's server,  ATM</td>
+                                </tr>
+                                <tr>
+                                <td>Goals</td>
+                                <td>Check balance, print balance on paper or screen, withdraw money, deposit money</td>
+                                </tr>
+                                <tr>
+                                <td>Stakeholders</td>
+                                <td>The bank, the fraudulent depart., the security team, the card company (Visa,Mastercard etc.)</td>
+                                </tr>
+                                <tr>
+                                <td>Pre-conditions</td>
+                                <td>The account owner knows the card's PIN. There are credis on account, it is possible to use to the nearest ATM 24/7.</td>
+                                </tr>
+                                <tr>
+                                <td>Post-conditions</td>
+                                <td>The account owner will check the balance and will be able to go for shopping either by withdrawing cash or by know he have enough credits. </td>
+                                </tr>
+                                <tr>
+                                <td>Basic flow</td>
+                                <td>The user put the card on ATM and type the PIN. The user chose from the menu to check the balance. Then to print the balance on screen. The ATM showing the available credits on screen and then asks if the user want to do anything else or to log out. The user chose to logout, the ATM drop out the card. The user took the card and left.</td>
+                                </tr>
+                                <tr>
+                                <td>Alternate path</td>
+                                <td>The user put the card on ATM and then he miss-pressed a button input an incorrect PIN. An error screen comes up. The user retry and input the correct PIN. The user chose from the menu to check the balance. Then to print the balance on screen. The ATM showing the available credits on screen and then asks if the user want to do anything else or to log out. The user chose to withdraw 50 euros but the ATM has only 20 euro bills. The user type 60 euros and hit the submit. The ATM drop out the card and wait for the user to remove it. The user removes the card. The ATM present the cash. The user took the cash and left.</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                    <h3>Develop a simple use case scenario for the vet application we completed a couple of weeks ago:</h3>
+                    <table>
+                            <tbody>
+                                <tr>
+                                <td>Use Case #1 </td>
+                                <td>Check patient's dosage</td>
+                                </tr>
+                                <tr>
+                                <td>Description</td>
+                                <td>Medical staff at Vet's clinic need to use the VetSoft SW to generate medication doses and print the prescription</td>
+                                </tr>
+                                <tr>
+                                <td>Actors</td>
+                                <td>Doctors and medical staff (nurses etc.), database server, Vet's PC</td>
+                                </tr>
+                                <tr>
+                                <td>Goals</td>
+                                <td>Patient medical record, fast calculation of dosage depending different inputs (such as age, weight, nursing status), calculation of costs for prescription and medication, printable format of prescription.</td>
+                                </tr>
+                                <tr>
+                                <td>Stakeholders</td>
+                                <td>Patients, pet carrers, suppliers.</td>
+                                </tr>
+                                <tr>
+                                <td>Pre-conditions</td>
+                                <td>User must have authorisation to use the software and knowledge of the medication. For patient information, examinations must take place before the use of software.</td>
+                                </tr>
+                                <tr>
+                                <td>Post-conditions</td>
+                                <td>The patient's parents should get a summary of the cost of prescription and medication alongside with notes and usage instructions from the doctor. The doctor stay updated with the patient's medical record.</td>
+                                </tr>
+                                <tr>
+                                <td>Basic flow</td>
+                                <td>The user login on the software, the system validate the user autorization. The staff check the patient records through the menu. The system is getting patent information from the server and present it on screen. The staff making changes on information as new weight data emerged. The staff picks the medication. The system calculates the dosage, costs, and gives the option to the staff to add notes and usage instructions, then to save and print prescription or just save on record. The staff add notes and instructions, then save and print the prescription. The system send the file to the printer, after 30 seconds of no activity, logs out the user.</td>
+                                </tr>
+                                <tr>
+                                <td>Alternate path</td>
+                                <td>The user log into the software, the system validates the user autorization. The user using the search box to check the records of a nursing female dog by using the patient ChipID. The system search the server and present the record on screen. The user read the information and change the patient previous status to "nursing". The user picks the medication. The system present a warning that nursing animals have to get drops too. The user close the warning and proceed. The system calculates the dosage, costs, and gives the option to the staff to add notes and usage instructions, then to save and print prescription or just save on record. The staff add notes and instructions, then save and print the prescription. The system send the file to the printer, after 30 seconds of no activity, logs out the user.</td>
+                                </tr>
+                            </tbody>
+                    </table>
+                    <h3>Practice User Stories:</h3>
+                    <h4>Develop a number of user stories for check balance scenario</h4>
+                    <ol>
+                        <li>As a bank's account owner, i want to use my bank's mobile app to check my credit balance so i pay my bills online and not have to wait on the line to deposit the money.</li>
+                        <li>As a bank's customer, i want to have access to ATMs so i could check my balance while i'm outside on Saturday night and get extra cash when to buy more drinks.</li>
+                        <li>As a business owner, i want to check my bank's account from the web before i proceed with an order from my suppliers just to make sure that i have enough money.</li>
+                        <li>As a web developer, i want to get instant notifications and be able to track my account's balance anytime through my phone about payments made from my clients so i can release their projects.</li>
+                    </ol>
                 </div>
 
                 <!-- Week 6: Detailed Use Case -->
